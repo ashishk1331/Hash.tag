@@ -106,23 +106,24 @@ document.querySelector('input').addEventListener('keypress', function (e) {
 
 
 document.querySelector('#selectAll').addEventListener("click",function(e){
-		var tags = document.getElementsByTagName('em');
-		for (var i = 0; i < tags.length; i+=1) {
-			const atag = document.getElementById('count');
-		atag.textContent = parseInt(atag.textContent) + 1;
-			var ele = document.createElement('li');
-		var text = tags[i].textContent.substring(0,tags[i].textContent.length-2);
-		var newText = document.createTextNode(text);
-		ele.appendChild(newText);
+		var lis = document.querySelectorAll('#feed > em');
+		for(var i = 0;i<lis.length;i++)
+		{
+		var em = document.createElement('LI');
+		var text2 = lis[i].textContent + "";
+		var text = lis[i].textContent.substring(0,text2.length-2);
+    	var emtext = document.createTextNode(text);
+    	em.appendChild(emtext); 
 
-		var a = document.createElement('A');
+    	var a = document.createElement('A');
     	a.href = "#";
-    	var atext = document.createTextNode('   ✖');
+    	var atext = document.createTextNode(' ✖');
     	a.appendChild(atext);
 
-    	ele.appendChild(a);
-
-		document.getElementById('hashtag-list-inside-div').appendChild(ele);
-		tags[i].remove();
+    	em.appendChild(a);
+    	document.querySelector('#hashtag-list-inside-div').appendChild(em);
+    	const atag = document.getElementById('count');
+		atag.textContent = parseInt(atag.textContent) + 1;
+		lis[i].remove();
 		};
 });
