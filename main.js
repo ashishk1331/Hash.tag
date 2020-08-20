@@ -1,15 +1,4 @@
-/*const tags = document.getElementById('feed');
-tags.addEventListener("click",function(e){
-	const atag = e.target;
-	atag.parentNode.remove();
-});
 
-document.querySelector('#txtSearch').addEventListener('keypress', function (e) {
-    if (e.key === 'Enter') {
-      // code for enter
-    }
-});
-*/
 document.getElementById('feed').addEventListener("click",function(e){
 	if (e.target.parentNode.textContent.substring(0,1) == "#") {
 		e.target.parentNode.remove();
@@ -59,10 +48,6 @@ document.getElementById('clipboard').addEventListener("click",
 			}
 	});
 
-document.querySelector('#store-head > a').addEventListener("click",function(e){
-		document.getElementById('store').style.display = "none";
-});
-
 document.querySelector('#feed').addEventListener("click",function(e){
 		document.getElementById('store').style.display = "none";
 });
@@ -74,7 +59,7 @@ document.querySelector('#copy-to-clipboard').addEventListener("click",function(e
 	if(typeof(li) != 'undefined' || li != null)
 	{
 		for (var i = 0; i < li.length; i++) {
-			tags = tags +" "+ li[i].textContent;
+			tags = tags +" "+ li[i].textContent.trim().substring(0,li[i].textContent.length-1);
 		};
 		const el = document.createElement('textarea');
  		 el.value = tags;
@@ -85,10 +70,21 @@ document.querySelector('#copy-to-clipboard').addEventListener("click",function(e
 	}
 });
 
+document.querySelector('input').addEventListener('click',function(e){
+	const store = document.getElementById('store');
+			if(store.style.display == "none")
+				var a = 0;
+			else
+				store.style.display = "none";
+});
 
 document.querySelector('input').addEventListener('keypress', function (e) {
     if (e.key === 'Enter') {
-    	var text = "#" + document.querySelector('input').value;
+    	var text = "#" + document.querySelector('input').value.replace(' ','_');
+    	if(text.trim().length > 1)
+    	{
+    	document.querySelector('input').value = '';
+    	
     	var em = document.createElement('EM');
     	var emtext = document.createTextNode(text);
     	em.appendChild(emtext); 
@@ -101,8 +97,8 @@ document.querySelector('input').addEventListener('keypress', function (e) {
     	em.appendChild(a);
     	document.querySelector('#feed').appendChild(em);
     }
+    }
 });
-
 
 
 document.querySelector('#selectAll').addEventListener("click",function(e){
